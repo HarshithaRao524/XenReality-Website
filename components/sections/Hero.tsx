@@ -210,7 +210,7 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] as const as const },
   }),
 };
 
@@ -300,7 +300,7 @@ export default function Hero() {
                 initial={{ opacity: 0, x: 30, scale: 0.97 }}
                 animate={{ opacity: 1, x: 0,  scale: 1    }}
                 exit={{   opacity: 0, x: -30, scale: 0.97 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }}
                 className="bg-gray-800 rounded-2xl p-4 shadow-2xl border border-gray-700 mb-5"
               >
                 <CardContent variant={CARDS[activeCard].variant} />

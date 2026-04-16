@@ -117,7 +117,7 @@ export default function ProductsShowcase() {
                   initial={{ opacity: 0, x: isEven ? -40 : 40 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
                   className="w-full lg:w-1/2 shrink-0"
                 >
                   <div
