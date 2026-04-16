@@ -11,7 +11,7 @@ const CREDENTIALS: Record<string, string> = {
 };
 
 const PASSWORDS: Record<string, string> = {
-  xenreality: "xen@2025",
+  xenreality: "xen@2026",
   harshitha:  "xen@2025",
 };
 
