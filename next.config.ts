@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  cacheComponents: true,
+  transpilePackages: ["motion"],
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.sanity.io" },
+    ],
+  },
 };
 
 export default nextConfig;
