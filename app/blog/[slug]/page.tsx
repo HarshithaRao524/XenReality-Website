@@ -354,6 +354,12 @@ async function SanityPostContent({ params }: { params: Promise<{ slug: string }>
   );
 }
 
+// ── Static params & dynamic config ────────────────────────────────────────────
+
+export function generateStaticParams() {
+  return STATIC_POSTS.map((p) => ({ slug: p.slug }));
+}
+
 // ── Metadata ───────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({
