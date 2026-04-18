@@ -37,7 +37,7 @@ const NAV_ITEMS: NavItem[] = [
   { kind: "link", label: "Case Studies", href: "#case-studies" },
   { kind: "mega", label: "Company",      panelId: "company"    },
   { kind: "link", label: "Blog",         href: "/blog"         },
-  { kind: "link", label: "Contact",      href: "#contact"      },
+  { kind: "link", label: "Contact",      href: "/contact"      },
 ];
 
 const MEGA_PANELS: Record<string, MegaPanel> = {
@@ -57,9 +57,9 @@ const MEGA_PANELS: Record<string, MegaPanel> = {
     ],
     aside: {
       tag: "New",
-      headline: "Introducing XenCapture — AI-powered 3D content creation for any industry.",
-      href: "#",
-      gradientClass: "from-blue-600 via-blue-700 to-indigo-800",
+      headline: "Customized AI Solutions",
+      href: "/contact",
+      gradientClass: "from-[#2E3192] via-blue-700 to-[#00AEEF]",
     },
   },
 
@@ -153,11 +153,12 @@ function MegaMenuPanel({ panelId }: { panelId: string }) {
             <p className="text-sm font-semibold text-gray-900 mt-1 leading-snug">
               {panel.aside.headline}
             </p>
+            <p className="text-xs text-gray-500 mt-1">To know more</p>
             <Link
               href={panel.aside.href}
-              className="text-sm text-blue-600 font-medium mt-2 inline-block hover:underline"
+              className="mt-3 inline-flex items-center justify-center w-full bg-[#F58220] hover:bg-[#d96e10] text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors"
             >
-              Read story →
+              Reach Out to Us
             </Link>
           </div>
         )}

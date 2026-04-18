@@ -251,7 +251,7 @@ export default function Hero() {
         >
           <Link
             href="#contact"
-            className="inline-flex items-center justify-center bg-gradient-to-r from-[#0a2da8] to-[#55aaff] hover:opacity-90 text-white font-semibold text-base px-10 py-4 rounded-[40px] tracking-[-0.08px] transition-opacity"
+            className="inline-flex items-center justify-center bg-gradient-to-r from-[#2E3192] to-[#00AEEF] hover:opacity-90 text-white font-semibold text-base px-10 py-4 rounded-[40px] tracking-[-0.08px] transition-opacity"
           >
             Get started
           </Link>

@@ -21,7 +21,7 @@ export default function CTABanner() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
           className="text-4xl md:text-6xl font-bold leading-tight"
         >
-          Ready to make your operations safer?
+          Ready to automate your operations with Vision AI?
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -30,8 +30,8 @@ export default function CTABanner() {
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] as const }}
           className="text-xl text-blue-100 max-w-2xl"
         >
-          Join over 120,000 companies that trust us to keep their teams safe,
-          their fleets efficient, and their costs low.
+          Partner with XenReality to deploy intelligent Vision AI solutions
+          tailored to your industry — faster than you think.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,16 +41,16 @@ export default function CTABanner() {
           className="flex flex-col sm:flex-row gap-4"
         >
           <Link
-            href="#"
+            href="#contact"
             className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-200 hover:scale-105 shadow-xl shadow-blue-900/30 text-lg"
           >
-            Get started free
+            Get started
           </Link>
           <Link
-            href="#"
+            href="/blog"
             className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 border border-white/30 text-lg"
           >
-            Talk to sales
+            Read our blog
           </Link>
         </motion.div>
       </div>

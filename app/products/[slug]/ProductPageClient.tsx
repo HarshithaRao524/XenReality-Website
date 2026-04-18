@@ -303,7 +303,7 @@ export default function ProductPageClient({ product }: { product: ProductData })
             <div className="flex flex-row items-center gap-4">
               <Link
                 href="#contact"
-                className="inline-flex items-center justify-center bg-gradient-to-r from-[#0a2da8] to-[#55aaff] hover:opacity-90 text-white font-semibold text-base px-10 py-3.5 rounded-[40px] transition-opacity"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-[#2E3192] to-[#00AEEF] hover:opacity-90 text-white font-semibold text-base px-10 py-3.5 rounded-[40px] transition-opacity"
               >
                 Get started
               </Link>
@@ -422,7 +422,7 @@ export default function ProductPageClient({ product }: { product: ProductData })
             </p>
             <Link
               href="#contact"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0a2da8] to-[#55aaff] hover:opacity-90 text-white font-semibold px-10 py-4 rounded-full transition-opacity text-base"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#2E3192] to-[#00AEEF] hover:opacity-90 text-white font-semibold px-10 py-4 rounded-full transition-opacity text-base"
             >
               Request a demo
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

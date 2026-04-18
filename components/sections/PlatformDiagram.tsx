@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 
 const products = [
@@ -82,8 +83,12 @@ const cardVariants = {
   },
 };
 
-// x-centres of 5 equal columns in an 800-unit viewBox
 const LINE_X = [80, 240, 400, 560, 720];
+
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export default function PlatformDiagram() {
   return (
@@ -107,7 +112,7 @@ export default function PlatformDiagram() {
           </h2>
         </motion.div>
 
-        {/* Diagram — cards on top, hub below */}
+        {/* Diagram */}
         <div className="relative flex flex-col items-center">
 
           {/* Product cards */}
@@ -119,11 +124,12 @@ export default function PlatformDiagram() {
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 w-full"
           >
             {products.map((product) => (
-              <motion.div
+              <motion.button
                 key={product.id}
                 variants={cardVariants}
                 whileHover={{ y: -6, scale: 1.04 }}
-                className="group cursor-pointer"
+                onClick={() => scrollToSection(product.id)}
+                className="group cursor-pointer text-left"
               >
                 <div
                   className={`bg-gradient-to-br ${product.color} rounded-2xl p-5 flex flex-col items-center gap-3 text-center border border-white/10 shadow-xl transition-shadow duration-300 group-hover:shadow-2xl`}
@@ -133,11 +139,11 @@ export default function PlatformDiagram() {
                     {product.label}
                   </span>
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
           </motion.div>
 
-          {/* Connecting lines — converge downward to hub */}
+          {/* Connecting lines */}
           <svg
             className="w-full max-w-4xl h-28 pointer-events-none hidden md:block"
             viewBox="0 0 800 112"
@@ -146,10 +152,7 @@ export default function PlatformDiagram() {
             {LINE_X.map((x, i) => (
               <motion.line
                 key={i}
-                x1={x}
-                y1="0"
-                x2="400"
-                y2="112"
+                x1={x} y1="0" x2="400" y2="112"
                 stroke="#3b82f6"
                 strokeWidth="1"
                 strokeOpacity="0.3"
@@ -161,15 +164,22 @@ export default function PlatformDiagram() {
             ))}
           </svg>
 
-          {/* Central hub — bottom, "X" initial */}
+          {/* Central hub — XenReality logomark */}
           <motion.div
             initial={{ opacity: 0, scale: 0.7 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-            className="relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-2xl shadow-blue-600/40"
+            className="relative z-10 w-20 h-20 rounded-2xl shadow-2xl shadow-blue-600/40 overflow-hidden"
           >
-            <span className="text-3xl font-black text-white">X</span>
+            <Image
+              src="/XenRealitymark.png"
+              alt="XenReality"
+              width={80}
+              height={80}
+              unoptimized
+              className="w-full h-full object-cover"
+            />
           </motion.div>
 
         </div>

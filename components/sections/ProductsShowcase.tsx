@@ -181,7 +181,7 @@ export default function ProductsShowcase() {
 
                   <Link
                     href={`/products/${product.slug}`}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0a2da8] to-[#55aaff] hover:opacity-90 text-white font-semibold px-8 py-3.5 rounded-full transition-opacity text-base"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#2E3192] to-[#00AEEF] hover:opacity-90 text-white font-semibold px-8 py-3.5 rounded-full transition-opacity text-base"
                   >
                     Know more
                     <svg
