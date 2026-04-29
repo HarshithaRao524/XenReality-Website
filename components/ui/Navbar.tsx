@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import XenRealityLogo from "@/components/ui/XenRealityLogo";
@@ -20,8 +20,10 @@ interface MegaSection {
 interface MegaAside {
   tag: string;
   headline: string;
+  subheadline?: string;
   href: string;
   gradientClass: string;
+  visual?: React.ComponentType;
 }
 
 interface MegaPanel {
@@ -29,15 +31,72 @@ interface MegaPanel {
   aside?: MegaAside;
 }
 
+// ── Custom AI Solutions visual ─────────────────────────────────────────────────
+
+function CustomAIVisual() {
+  return (
+    <svg viewBox="0 0 224 144" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      {/* Background glow */}
+      <ellipse cx="112" cy="72" rx="80" ry="50" fill="white" fillOpacity="0.07" />
+
+      {/* Bold radar rings */}
+      <circle cx="112" cy="72" r="55" stroke="white" strokeOpacity="0.55" strokeWidth="1" />
+      <circle cx="112" cy="72" r="38" stroke="white" strokeOpacity="0.35" strokeWidth="0.9" strokeDasharray="4 3" />
+      <circle cx="112" cy="72" r="20" stroke="white" strokeOpacity="0.45" strokeWidth="0.9" />
+
+      {/* Crosshairs */}
+      <line x1="55"  y1="72" x2="169" y2="72" stroke="white" strokeOpacity="0.35" strokeWidth="0.8" />
+      <line x1="112" y1="17" x2="112" y2="127" stroke="white" strokeOpacity="0.35" strokeWidth="0.8" />
+
+      {/* Sweep wedge */}
+      <path d="M112 72 L167 72 A55 55 0 0 0 130 21 Z" fill="white" fillOpacity="0.12" />
+      <line x1="112" y1="72" x2="130" y2="21" stroke="white" strokeOpacity="0.85" strokeWidth="1.5" strokeLinecap="round" />
+
+      {/* Cardinal ticks */}
+      <line x1="169" y1="72" x2="160" y2="72" stroke="white" strokeOpacity="0.85" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="55"  y1="72" x2="64"  y2="72" stroke="white" strokeOpacity="0.85" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="112" y1="17" x2="112" y2="26" stroke="white" strokeOpacity="0.85" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="112" y1="127" x2="112" y2="118" stroke="white" strokeOpacity="0.85" strokeWidth="1.5" strokeLinecap="round" />
+
+      {/* Detection blips — large, bold */}
+      <circle cx="154" cy="83" r="5"  fill="white" fillOpacity="1" />
+      <circle cx="154" cy="83" r="10" stroke="white" strokeOpacity="0.6" strokeWidth="1.2" />
+      <circle cx="154" cy="83" r="16" stroke="white" strokeOpacity="0.2" strokeWidth="1" />
+
+      <circle cx="80"  cy="55" r="4"  fill="white" fillOpacity="0.95" />
+      <circle cx="80"  cy="55" r="8"  stroke="white" strokeOpacity="0.5" strokeWidth="1.2" />
+
+      <circle cx="78"  cy="108" r="3" fill="white" fillOpacity="0.85" />
+      <circle cx="78"  cy="108" r="7" stroke="white" strokeOpacity="0.4" strokeWidth="1" />
+
+      <circle cx="146" cy="48" r="3"  fill="white" fillOpacity="0.85" />
+      <circle cx="146" cy="48" r="7"  stroke="white" strokeOpacity="0.4" strokeWidth="1" />
+
+      {/* Center */}
+      <circle cx="112" cy="72" r="4"  fill="white" fillOpacity="1" />
+      <circle cx="112" cy="72" r="9"  stroke="white" strokeOpacity="0.5" strokeWidth="1" />
+
+      {/* Corner brackets */}
+      <path d="M5 5h10M5 5v10"     stroke="white" strokeOpacity="0.7" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M219 5h-10M219 5v10"  stroke="white" strokeOpacity="0.7" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M5 139h10M5 139v-10"  stroke="white" strokeOpacity="0.7" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M219 139h-10M219 139v-10" stroke="white" strokeOpacity="0.7" strokeWidth="1.5" strokeLinecap="round" />
+
+      {/* Status */}
+      <circle cx="12" cy="135" r="2.5" fill="#4ade80" />
+      <text x="18" y="138" fontSize="6" fill="white" fillOpacity="0.8" fontFamily="ui-monospace,monospace" letterSpacing="0.8">SCANNING · 4 TARGETS</text>
+    </svg>
+  );
+}
+
 // ── Data ───────────────────────────────────────────────────────────────────────
 
 const NAV_ITEMS: NavItem[] = [
-  { kind: "link", label: "Home",         href: "/"             },
-  { kind: "mega", label: "Products",     panelId: "products"   },
-  { kind: "link", label: "Case Studies", href: "#case-studies" },
-  { kind: "mega", label: "Company",      panelId: "company"    },
-  { kind: "link", label: "Blog",         href: "/blog"         },
-  { kind: "link", label: "Contact",      href: "/contact"      },
+  { kind: "link", label: "Home",     href: "/"        },
+  { kind: "mega", label: "Products", panelId: "products" },
+  { kind: "mega", label: "Company",  panelId: "company"  },
+  { kind: "link", label: "Blog",     href: "/blog"    },
+  { kind: "link", label: "Contact",  href: "/contact" },
 ];
 
 const MEGA_PANELS: Record<string, MegaPanel> = {
@@ -47,19 +106,21 @@ const MEGA_PANELS: Record<string, MegaPanel> = {
         heading: "OUR PRODUCTS",
         columns: 2,
         items: [
-          { label: "XenTrack",   href: "/#xentrack",   description: "Footfall, zone timings and dwell time analytics" },
-          { label: "XenInspect", href: "/#xeninspect", description: "Custom defect detection using Computer Vision" },
-          { label: "XenRead",    href: "/#xenread",    description: "OCR, detection and information extraction from images" },
-          { label: "XenScan",    href: "/#xenscan",    description: "Facial recognition, customer profiling and number plate recognition" },
-          { label: "XenCapture", href: "/#xencapture", description: "AI Powered 3D Content Creation Tool" },
+          { label: "XenTrack",   href: "/#xentrack",   description: "Activity tracking & video analytics from CCTV" },
+          { label: "XenInspect", href: "/#xeninspect", description: "Visual defect detection using standard cameras" },
+          { label: "XenRead",    href: "/#xenread",    description: "Advanced OCR and data extraction from images" },
+          { label: "XenScan",    href: "/#xenscan",    description: "Recognition and surveillance from CCTV" },
+          { label: "XenCapture", href: "/#xencapture", description: "AI-powered 3D content creation tool from captured images" },
         ],
       },
     ],
     aside: {
       tag: "New",
-      headline: "Customized AI Solutions",
+      headline: "Custom AI Solutions",
+      subheadline: "For Manufacturing, Energy, Automotive, Retail and Defence Sectors",
       href: "/contact",
       gradientClass: "from-[#2E3192] via-blue-700 to-[#00AEEF]",
+      visual: CustomAIVisual,
     },
   },
 
@@ -67,12 +128,12 @@ const MEGA_PANELS: Record<string, MegaPanel> = {
     sections: [
       {
         heading: "COMPANY",
-        columns: 1,
+        columns: 2,
         items: [
-          { label: "About",               href: "#about",       description: "Our mission and story" },
-          { label: "Careers",             href: "#careers",     description: "Join the team" },
-          { label: "Partnership Program", href: "#partnership", description: "Work with us" },
-          { label: "News",                href: "#news",        description: "Latest updates and announcements" },
+          { label: "About",               href: "/about",       description: "Our mission and story" },
+          { label: "Partnership Program", href: "/partners",    description: "Work with us" },
+          { label: "Careers",             href: "/careers",     description: "Join the team" },
+          { label: "News",                href: "/news",        description: "Latest updates and announcements" },
         ],
       },
     ],
@@ -133,14 +194,17 @@ function MegaMenuPanel({ panelId }: { panelId: string }) {
             <div
               className={`h-36 rounded-xl bg-gradient-to-br ${panel.aside.gradientClass} mb-3 overflow-hidden relative`}
             >
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
-                  backgroundSize: "14px 14px",
-                }}
-              />
-              {/* Decorative badge in corner */}
+              {panel.aside.visual ? (
+                <panel.aside.visual />
+              ) : (
+                <div
+                  className="absolute inset-0 opacity-20"
+                  style={{
+                    backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+                    backgroundSize: "14px 14px",
+                  }}
+                />
+              )}
               <div className="absolute bottom-3 right-3 bg-white/20 rounded-lg px-2 py-1">
                 <span className="text-[10px] font-bold text-white uppercase tracking-wider">
                   {panel.aside.tag}
@@ -153,7 +217,9 @@ function MegaMenuPanel({ panelId }: { panelId: string }) {
             <p className="text-sm font-semibold text-gray-900 mt-1 leading-snug">
               {panel.aside.headline}
             </p>
-            <p className="text-xs text-gray-500 mt-1">To know more</p>
+            {panel.aside.subheadline && (
+              <p className="text-xs text-gray-500 mt-1 leading-snug">{panel.aside.subheadline}</p>
+            )}
             <Link
               href={panel.aside.href}
               className="mt-3 inline-flex items-center justify-center w-full bg-[#F58220] hover:bg-[#d96e10] text-white text-xs font-semibold px-3 py-2 rounded-lg transition-colors"
@@ -209,12 +275,12 @@ export default function Navbar() {
       {/* Main nav bar */}
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center">
         {/* Logo */}
-        <Link href="/" className="shrink-0">
+        <Link href="/" className="shrink-0 flex items-center self-center">
           <XenRealityLogo onDark={!isLight} />
         </Link>
 
         {/* Center nav — flex-1 so it never overlaps logo or right actions */}
-        <div className="hidden lg:flex flex-1 items-center justify-center">
+        <div className="hidden lg:flex flex-1 items-center justify-center self-center">
           {NAV_ITEMS.map((item) => {
             if (item.kind === "link") {
               return (
