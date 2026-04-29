@@ -8,20 +8,20 @@ const PRODUCTS: Record<string, ProductData> = {
   xentrack: {
     slug: "xentrack",
     name: "XenTrack",
-    label: "Footfall & Zone Analytics",
-    tagline: "Know exactly where your customers go — and why.",
+    label: "AI-Powered Video Analytics",
+    tagline: "Real-time tracking of activities in Retail spaces.",
     heroSubtext:
-      "Real-time footfall counting, zone dwell-time analytics, and AI heatmaps give you the data to optimise every square foot of your physical space.",
-    introHeadline: "Stop guessing. Start knowing.",
+      "Boost business performance with footfall counting, dwell time analytics and heatmaps that turn customer movement into sales insights.",
+    introHeadline: "Enterprise-grade AI for your Retail Space.\nOn-premise deployment for Data Security",
     introSubtext:
-      "XenTrack brings data-driven decision making to physical spaces — giving operators the same behavioural insights that e-commerce teams have had for years.",
+      "XenTrack brings data-driven decision making to physical spaces — with the below features",
     tabs: [
       {
         label: "Footfall Counting",
         heading: "Accurate people counting at every entry point",
-        body: "XenTrack uses overhead AI sensors to count people entering, exiting, and moving through your space with millimetre precision — at any volume, in any lighting condition.",
+        body: "XenTrack uses existing CCTV camera feeds to count people entering, exiting, and moving through your space with high precision",
         bullets: [
-          "Real-time counts updated every second",
+          "Real-time counts with demographics",
           "Bi-directional tracking at entries and exits",
           "Works in low-light and crowded conditions",
           "No personal data captured — fully privacy compliant",
@@ -76,8 +76,8 @@ const PRODUCTS: Record<string, ProductData> = {
       "Retail & Shopping Centres",
       "Airports & Transport Hubs",
       "Stadiums & Live Venues",
-      "Museums & Exhibitions",
-      "Office & Smart Buildings",
+      "Hotels & Restaurants",
+      "Factories & Office Buildings",
     ],
   },
 

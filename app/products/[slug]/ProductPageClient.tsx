@@ -288,15 +288,18 @@ export default function ProductPageClient({ product }: { product: ProductData })
       <main>
 
         {/* ── Hero ──────────────────────────────────────────────────────── */}
-        <section className="relative min-h-screen bg-gray-950 overflow-x-clip flex flex-col lg:flex-row pt-16">
+        <section className="relative bg-gray-950 overflow-x-clip flex flex-col lg:flex-row pt-16" style={{ minHeight: "calc(100vh + 50px)" }}>
           {/* Left — text */}
           <div className="relative z-10 w-full lg:w-[52%] flex flex-col justify-center px-10 lg:px-20 pt-20 pb-16">
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-5">
+            <h1 className="text-[52px] font-bold leading-none tracking-tight text-white mb-3">
+              {product.name}
+            </h1>
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-6">
               {product.label}
             </p>
-            <h1 className="text-[42px] font-bold leading-[48px] tracking-tight text-white max-w-[480px] mb-6">
+            <p className="text-[28px] font-bold leading-snug tracking-tight text-white max-w-[480px] mb-5">
               {product.tagline}
-            </h1>
+            </p>
             <p className="text-lg text-gray-400 leading-relaxed mb-10 max-w-lg">
               {product.heroSubtext}
             </p>
@@ -305,13 +308,7 @@ export default function ProductPageClient({ product }: { product: ProductData })
                 href="#contact"
                 className="inline-flex items-center justify-center bg-gradient-to-r from-[#2E3192] to-[#00AEEF] hover:opacity-90 text-white font-semibold text-base px-10 py-3.5 rounded-[40px] transition-opacity"
               >
-                Get started
-              </Link>
-              <Link
-                href="/"
-                className="inline-flex items-center justify-center border border-white/30 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white/10 transition-colors text-base"
-              >
-                ← Back
+                Learn More
               </Link>
             </div>
           </div>
@@ -323,9 +320,9 @@ export default function ProductPageClient({ product }: { product: ProductData })
         </section>
 
         {/* ── Intro ─────────────────────────────────────────────────────── */}
-        <section className="py-20 bg-white">
-          <div className="max-w-3xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight">
+        <section className="rounded-t-[2.5rem] relative z-10 -mt-10 py-20 bg-white">
+          <div className="max-w-5xl mx-auto px-6 text-center">
+            <h2 className="text-[26px] md:text-[36px] font-bold text-gray-900 mb-5 leading-tight whitespace-pre-line">
               {product.introHeadline}
             </h2>
             <p className="text-lg text-gray-500 leading-relaxed">
@@ -390,7 +387,7 @@ export default function ProductPageClient({ product }: { product: ProductData })
         </section>
 
         {/* ── Use cases ─────────────────────────────────────────────────── */}
-        <section className="py-20 bg-gray-950">
+        <section className="rounded-t-[2.5rem] relative z-10 -mt-10 py-20 bg-gray-950">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-blue-400 mb-3">
               Industries
@@ -412,7 +409,7 @@ export default function ProductPageClient({ product }: { product: ProductData })
         </section>
 
         {/* ── CTA ───────────────────────────────────────────────────────── */}
-        <section className="py-24 bg-white">
+        <section className="rounded-t-[2.5rem] relative z-10 -mt-10 py-24 bg-white">
           <div className="max-w-3xl mx-auto px-6 text-center">
             <h2 className="text-4xl font-bold text-gray-900 mb-5">
               Ready to see {product.name} in action?
