@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
-// DM Sans is the closest freely available match to MaisonNeue (gomotive's font)
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
 });
@@ -29,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} antialiased`}>
+    <html lang="en" className={`${openSans.variable} antialiased`}>
       <body className="min-h-screen flex flex-col bg-white text-gray-900">
         {children}
       </body>
