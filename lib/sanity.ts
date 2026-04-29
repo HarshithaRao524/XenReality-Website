@@ -67,3 +67,29 @@ export async function getAllPostSlugs(): Promise<string[]> {
   );
   return results.map((r) => r.slug.current);
 }
+
+// ---- News Posts ----
+
+export interface NewsPost {
+  _id: string;
+  headline?: string;
+  content: string;
+  publishedAt: string;
+  images?: Array<SanityImageSource & { alt?: string; _key: string }>;
+  linkedinUrl?: string;
+  tags?: string[];
+}
+
+export async function getAllNewsPosts(): Promise<NewsPost[]> {
+  return sanityClient.fetch(
+    `*[_type == "newsPost"] | order(publishedAt desc) {
+      _id,
+      headline,
+      content,
+      publishedAt,
+      images,
+      linkedinUrl,
+      tags
+    }`
+  );
+}

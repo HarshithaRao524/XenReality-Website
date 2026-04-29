@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { postSchema } from "./sanity/schemas/post";
+import { newsPostSchema } from "./sanity/schemas/newsPost";
 
 export default defineConfig({
   basePath: "/studio",
@@ -8,7 +9,7 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   plugins: [structureTool()],
   schema: {
-    types: [postSchema],
+    types: [postSchema, newsPostSchema],
   },
-  title: "My Site Studio",
+  title: "XenReality Studio",
 });
