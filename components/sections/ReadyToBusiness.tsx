@@ -123,7 +123,7 @@ export default function ReadyToBusiness() {
           </p>
           <Link
             href="/contact"
-            className="self-start inline-flex items-center justify-center bg-[#F58220] hover:bg-[#d96e10] text-white font-semibold px-8 py-4 rounded-lg transition-colors text-base"
+            className="self-start inline-flex items-center justify-center bg-[#F58220] hover:bg-[#d96e10] text-white text-xs font-semibold px-5 py-2.5 rounded-lg transition-colors"
           >
             Connect With Us Today
           </Link>

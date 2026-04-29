@@ -1,5 +1,6 @@
 import Navbar from "@/components/ui/Navbar";
 import Hero from "@/components/sections/Hero";
+import WhatIsVisionAI from "@/components/sections/WhatIsVisionAI";
 import PlatformDiagram from "@/components/sections/PlatformDiagram";
 import ProductsShowcase from "@/components/sections/ProductsShowcase";
 import WhyXenReality from "@/components/sections/WhyXenReality";
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <WhatIsVisionAI />
         <PlatformDiagram />
         <ProductsShowcase />
         <WhyXenReality />
