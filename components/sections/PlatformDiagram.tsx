@@ -1,39 +1,40 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 
+// Brand color progression: #2E3192 (dark) → #00AEEF (light) across 5 cards
 const products = [
   {
     id: "xentrack",
     label: "XenTrack",
+    bg: "#2E3192",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    color: "from-blue-600 to-blue-800",
   },
   {
     id: "xeninspect",
     label: "XenInspect",
+    bg: "#1a5cac",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8" />
         <path d="m21 21-4.35-4.35" />
         <path d="M8 11h6M11 8v6" />
       </svg>
     ),
-    color: "from-indigo-600 to-indigo-800",
   },
   {
     id: "xenread",
     label: "XenRead",
+    bg: "#0680c2",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <line x1="16" y1="13" x2="8" y2="13" />
@@ -41,49 +42,47 @@ const products = [
         <polyline points="10 9 9 9 8 9" />
       </svg>
     ),
-    color: "from-violet-600 to-violet-800",
   },
   {
     id: "xenscan",
     label: "XenScan",
+    bg: "#029ad9",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-        <circle cx="12" cy="13" r="4" />
+      // Facial recognition / object tracking — corner brackets + face
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 7V4a1 1 0 0 1 1-1h3" />
+        <path d="M22 7V4a1 1 0 0 0-1-1h-3" />
+        <path d="M2 17v3a1 1 0 0 0 1 1h3" />
+        <path d="M22 17v3a1 1 0 0 1-1 1h-3" />
+        <circle cx="12" cy="10" r="3" />
+        <path d="M9 17c0-1.66 1.34-3 3-3s3 1.34 3 3" />
       </svg>
     ),
-    color: "from-cyan-600 to-cyan-800",
   },
   {
     id: "xencapture",
     label: "XenCapture",
+    bg: "#00AEEF",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
       </svg>
     ),
-    color: "from-teal-600 to-teal-800",
   },
 ];
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: -30, scale: 0.95 },
+  hidden: { opacity: 0, y: 24, scale: 0.95 },
   visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
+    opacity: 1, y: 0, scale: 1,
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
-
-const LINE_X = [80, 240, 400, 560, 720];
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
@@ -92,50 +91,55 @@ function scrollToSection(id: string) {
 
 export default function PlatformDiagram() {
   return (
-    <section id="platform" className="py-28 bg-gray-950 text-white overflow-hidden">
+    <section id="platform" className="rounded-t-[2.5rem] relative z-10 -mt-10 pt-24 pb-20 bg-white text-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Header */}
+        {/* Eyebrow — small */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+          className="text-center mb-10"
         >
-          <p className="text-sm uppercase tracking-widest text-blue-400 font-semibold mb-4">
-            Integrated Operations Platform
+          <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
+            Plug-n-play Vision AI Platform for industrial automation.
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-            A fully integrated suite of products,{" "}
-            <span className="text-blue-400">powered by AI.</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+            Automate vision-based tasks<br />
+            with our lightweight, edge-optimised AI modules:
           </h2>
         </motion.div>
 
-        {/* Diagram */}
-        <div className="relative flex flex-col items-center">
-
-          {/* Product cards */}
+        {/* Dark product panel — Motive style */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
+          className="bg-[#050a14] rounded-3xl px-10 pt-12 pb-8"
+        >
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 w-full"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 mb-8"
           >
             {products.map((product) => (
               <motion.button
                 key={product.id}
                 variants={cardVariants}
-                whileHover={{ y: -6, scale: 1.04 }}
+                whileHover={{ y: -6, scale: 1.05 }}
                 onClick={() => scrollToSection(product.id)}
-                className="group cursor-pointer text-left"
+                className="group cursor-pointer"
               >
                 <div
-                  className={`bg-gradient-to-br ${product.color} rounded-2xl p-5 flex flex-col items-center gap-3 text-center border border-white/10 shadow-xl transition-shadow duration-300 group-hover:shadow-2xl`}
+                  className="rounded-2xl p-6 flex flex-col items-center gap-4 text-center border border-white/10 shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/20"
+                  style={{ backgroundColor: product.bg }}
                 >
-                  <div className="text-white/90">{product.icon}</div>
-                  <span className="text-xs font-semibold text-white/80 leading-tight">
+                  <div className="text-white">{product.icon}</div>
+                  <span className="text-sm font-semibold text-white leading-tight">
                     {product.label}
                   </span>
                 </div>
@@ -143,46 +147,18 @@ export default function PlatformDiagram() {
             ))}
           </motion.div>
 
-          {/* Connecting lines */}
-          <svg
-            className="w-full max-w-4xl h-28 pointer-events-none hidden md:block"
-            viewBox="0 0 800 112"
-            fill="none"
+          {/* Tagline inside dark panel */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center text-sm text-gray-400 whitespace-nowrap overflow-hidden text-ellipsis pb-4"
           >
-            {LINE_X.map((x, i) => (
-              <motion.line
-                key={i}
-                x1={x} y1="0" x2="400" y2="112"
-                stroke="#3b82f6"
-                strokeWidth="1"
-                strokeOpacity="0.3"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 + i * 0.07 }}
-              />
-            ))}
-          </svg>
+            Transform how your business interacts with visual data, providing new opportunities for improving efficiency, profitability &amp; innovation.
+          </motion.p>
+        </motion.div>
 
-          {/* Central hub — XenReality logomark */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.7 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-            className="relative z-10 w-20 h-20 rounded-2xl shadow-2xl shadow-blue-600/40 overflow-hidden"
-          >
-            <Image
-              src="/XenRealitymark.png"
-              alt="XenReality"
-              width={80}
-              height={80}
-              unoptimized
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-
-        </div>
       </div>
     </section>
   );
